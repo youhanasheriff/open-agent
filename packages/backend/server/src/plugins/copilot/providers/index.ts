@@ -4,6 +4,7 @@ import {
 } from './anthropic';
 import { FalProvider } from './fal';
 import { GeminiGenerativeProvider, GeminiVertexProvider } from './gemini';
+import { GroqProvider } from './groq';
 import { MorphProvider } from './morph';
 import { OpenAIProvider } from './openai';
 import { OracleProvider } from './oracle';
@@ -14,6 +15,7 @@ export const CopilotProviders = [
   FalProvider,
   GeminiGenerativeProvider,
   GeminiVertexProvider,
+  GroqProvider,
   PerplexityProvider,
   AnthropicOfficialProvider,
   AnthropicVertexProvider,
@@ -28,6 +30,7 @@ export {
 export { CopilotProviderFactory } from './factory';
 export { FalProvider } from './fal';
 export { GeminiGenerativeProvider, GeminiVertexProvider } from './gemini';
+export { GroqProvider } from './groq';
 export { OpenAIProvider } from './openai';
 export { OracleProvider } from './oracle';
 export { PerplexityProvider } from './perplexity';

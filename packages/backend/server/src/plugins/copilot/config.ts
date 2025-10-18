@@ -10,6 +10,7 @@ import {
 } from './providers/anthropic';
 import type { FalConfig } from './providers/fal';
 import { GeminiGenerativeConfig, GeminiVertexConfig } from './providers/gemini';
+import type { GroqConfig } from './providers/groq';
 import { MorphConfig } from './providers/morph';
 import { OpenAIConfig } from './providers/openai';
 import { OracleConfig } from './providers/oracle';
@@ -44,6 +45,7 @@ declare global {
         fal: ConfigItem<FalConfig>;
         gemini: ConfigItem<GeminiGenerativeConfig>;
         geminiVertex: ConfigItem<GeminiVertexConfig>;
+        groq: ConfigItem<GroqConfig>;
         perplexity: ConfigItem<PerplexityConfig>;
         anthropic: ConfigItem<AnthropicOfficialConfig>;
         anthropicVertex: ConfigItem<AnthropicVertexConfig>;
@@ -65,13 +67,13 @@ defineModuleConfig('copilot', {
       override_enabled: false,
       scenarios: {
         audio_transcribing: 'gemini-2.5-flash',
-        chat: 'claude-sonnet-4@20250514',
+        chat: 'gemini-2.5-flash-lite',
         embedding: 'gemini-embedding-001',
         image: 'gpt-image-1',
-        rerank: 'gpt-4.1',
-        coding: 'claude-sonnet-4@20250514',
-        complex_text_generation: 'gpt-4o-2024-08-06',
-        quick_decision_making: 'gpt-5-mini',
+        rerank: 'gemini-2.5-flash',
+        coding: 'gemini-2.5-flash-lite',
+        complex_text_generation: 'gemini-2.5-flash-lite',
+        quick_decision_making: 'gemini-2.5-flash-lite',
         quick_text_generation: 'gemini-2.5-flash',
         polish_and_summarize: 'gemini-2.5-flash',
       },
@@ -102,6 +104,14 @@ defineModuleConfig('copilot', {
     desc: 'The config for the gemini provider in Google Vertex AI.',
     default: {},
     schema: VertexSchema,
+  },
+  'providers.groq': {
+    desc: 'The config for the Groq provider.',
+    default: {
+      apiKey: '',
+      baseURL: 'https://api.groq.com/openai/v1',
+    },
+    link: 'https://groq.com/docs/',
   },
   'providers.perplexity': {
     desc: 'The config for the perplexity provider.',

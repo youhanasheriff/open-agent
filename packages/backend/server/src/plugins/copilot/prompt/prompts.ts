@@ -1444,7 +1444,7 @@ If there are items in the content that can be used as to-do tasks, please refer 
   {
     name: 'Make it real',
     action: 'Make it real',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     messages: [
       {
         role: 'system',
@@ -1486,7 +1486,7 @@ When sent new wireframes, respond ONLY with the contents of the html file.`,
   {
     name: 'Make it real with text',
     action: 'Make it real with text',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     messages: [
       {
         role: 'system',
@@ -1603,7 +1603,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Generate python code',
     action: 'Generate python code',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     messages: [
       {
         role: 'system',
@@ -1764,7 +1764,7 @@ const modelActions: Prompt[] = [
   {
     name: 'Apply Updates',
     action: 'Apply Updates',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     messages: [
       {
         role: 'user',
@@ -1920,7 +1920,7 @@ Now apply the \`updates\` to the \`content\`, following the intent in \`op\`, an
   },
   {
     name: 'Code Artifact',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     messages: [
       {
         role: 'system',
@@ -2105,7 +2105,7 @@ Content:
 const chat: Prompt[] = [
   {
     name: 'Chat With Open-Agent',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gemini-2.5-flash-lite',
     optionalModels: [
       'gpt-4.1',
       'gpt-5',
@@ -2113,7 +2113,7 @@ const chat: Prompt[] = [
       'o4-mini',
       'gemini-2.5-flash',
       'gemini-2.5-pro',
-      'claude-sonnet-4@20250514',
+      'gemini-2.5-flash-lite',
       'claude-3-7-sonnet@20250219',
     ],
     messages: [

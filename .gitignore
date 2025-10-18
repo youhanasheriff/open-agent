@@ -14,6 +14,7 @@
 .nyc_output
 .coverage
 .swc
+/deploy
 
 # dependencies
 node_modules

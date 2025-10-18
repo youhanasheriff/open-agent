@@ -39,7 +39,9 @@ export const ChatInput = ({
   initialInput?: string;
 }) => {
   const [tools, setTools] = useState(defaultTools);
-  const [model, setModel] = useState(tempModels[0].value);
+  // Find the first enabled model as default
+  const firstEnabledModel = tempModels.find(m => !m.disabled) || tempModels[0];
+  const [model, setModel] = useState(firstEnabledModel.value);
   const [input, setInput] = useState(initialInput ?? '');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaHeight, setTextareaHeight] = useState(45);
@@ -164,7 +166,18 @@ export const ChatInput = ({
           >
             <Button className={styles.modelSelector} variant="plain">
               <div className="flex items-center gap-1">
-                {tempModels.find(m => m.value === model)?.label}
+                <span
+                  className={
+                    tempModels.find(m => m.value === model)?.disabled
+                      ? 'opacity-50'
+                      : ''
+                  }
+                >
+                  {tempModels.find(m => m.value === model)?.label}
+                </span>
+                {tempModels.find(m => m.value === model)?.disabled && (
+                  <span className="text-xs text-red-500 ml-1">⚠</span>
+                )}
                 <ArrowDownSmallIcon className="text-xl" />
               </div>
             </Button>

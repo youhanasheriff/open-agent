@@ -10,24 +10,100 @@ import {
 } from '@blocksuite/icons/rc';
 import type { Dispatch, SetStateAction } from 'react';
 
-import { ChatGPTIcon } from '@/icons/chatgpt';
-import { ClaudeIcon } from '@/icons/claude';
 import { GeminiIcon } from '@/icons/gemini';
+import { GroqIcon } from '@/icons/groq';
+
+// Helper function to check if a provider has credentials
+// TODO: Replace with actual credential checking from backend
+const hasCredentials = (provider: string): boolean => {
+  // For now, assume Gemini models are available (using default API key)
+  // and Groq models need user-provided credentials
+  if (provider === 'gemini') return true; // TODO: Check actual credentials
+  if (provider === 'groq') return true; // TODO: Check actual credentials
+  return true;
+};
 
 export const tempModels = [
+  // Default model - Gemini 2.5 Flash Lite
   {
-    label: 'Claude Sonnet 4',
-    value: 'claude-sonnet-4@20250514',
-    icon: <ClaudeIcon />,
+    label: 'Gemini 2.5 Flash Lite',
+    value: 'gemini-2.5-flash-lite',
+    icon: <GeminiIcon />,
+    provider: 'gemini',
+    disabled: !hasCredentials('gemini'),
   },
-  { label: 'Gemini 2.5 Pro', value: 'gemini-2.5-pro', icon: <GeminiIcon /> },
-  { label: 'GPT-5', value: 'gpt-5', icon: <ChatGPTIcon /> },
+  {
+    label: 'Gemini 2.5 Pro',
+    value: 'gemini-2.5-pro',
+    icon: <GeminiIcon />,
+    provider: 'gemini',
+    disabled: !hasCredentials('gemini'),
+  },
   {
     label: 'Gemini 2.5 Flash',
     value: 'gemini-2.5-flash',
     icon: <GeminiIcon />,
+    provider: 'gemini',
+    disabled: !hasCredentials('gemini'),
   },
-  { label: 'o4 Mini', value: 'o4-mini', icon: <ChatGPTIcon /> },
+  // Groq models
+  {
+    label: 'Llama 3.1 8B Instant',
+    value: 'llama-3.1-8b-instant',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Llama 3.1 70B Versatile',
+    value: 'llama-3.1-70b-versatile',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Llama 3.3 70B Versatile',
+    value: 'llama-3.3-70b-versatile',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Llama 3.3 70B SpecDec',
+    value: 'llama-3.3-70b-specdec',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Mixtral 8x7B',
+    value: 'mixtral-8x7b-32768',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Gemma2 9B IT',
+    value: 'gemma2-9b-it',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  {
+    label: 'Gemma 7B IT',
+    value: 'gemma-7b-it',
+    icon: <GroqIcon />,
+    provider: 'groq',
+    disabled: !hasCredentials('groq'),
+  },
+  // Commented out non-Gemini models
+  // {
+  //   label: 'Claude Sonnet 4',
+  //   value: 'claude-sonnet-4@20250514',
+  //   icon: <ClaudeIcon />,
+  // },
+  // { label: 'GPT-5', value: 'gpt-5', icon: <ChatGPTIcon /> },
+  // { label: 'o4 Mini', value: 'o4-mini', icon: <ChatGPTIcon /> },
 ];
 
 export const configurableTools = [
@@ -110,11 +186,23 @@ export const ChatConfigMenu = ({
               items={tempModels.map(m => (
                 <MenuItem
                   key={m.value}
-                  onClick={() => setModel(m.value)}
+                  onClick={() => !m.disabled && setModel(m.value)}
                   prefixIcon={m.icon}
                   selected={model === m.value}
+                  disabled={m.disabled}
+                  style={{
+                    opacity: m.disabled ? 0.5 : 1,
+                    cursor: m.disabled ? 'not-allowed' : 'pointer',
+                  }}
                 >
-                  {m.label}
+                  <div className="flex items-center justify-between w-full">
+                    <span>{m.label}</span>
+                    {m.disabled && (
+                      <span className="text-xs text-gray-500 ml-2">
+                        No API Key
+                      </span>
+                    )}
+                  </div>
                 </MenuItem>
               ))}
               triggerOptions={{
